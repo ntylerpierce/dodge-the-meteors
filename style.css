@@ -15,4 +15,62 @@ body {
   display: block;
   width: 100vw;
   height: 100vh;
+  touch-action: none;
+}
+
+/* ── Touch controls (hidden on desktop, shown via JS on touch devices) ── */
+#touch-controls {
+  display: none;
+  pointer-events: none;
+}
+
+.touch-btn {
+  position: fixed;
+  pointer-events: all;
+  touch-action: none;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #fff;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#touch-left {
+  width: 80px;
+  height: 80px;
+  bottom: 16px;
+  left: 16px;
+  font-size: 30px;
+}
+
+#touch-right {
+  width: 80px;
+  height: 80px;
+  bottom: 16px;
+  left: 112px;
+  font-size: 30px;
+}
+
+#touch-jump {
+  width: 100px;
+  height: 100px;
+  bottom: 8px;
+  right: 16px;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 18px;
+}
+
+#touch-pause {
+  width: 44px;
+  height: 44px;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+  letter-spacing: 3px;
 }

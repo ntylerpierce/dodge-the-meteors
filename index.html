@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dodge the Meteors</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
+  <div id="touch-controls">
+    <div id="touch-left"  class="touch-btn">&#9664;</div>
+    <div id="touch-right" class="touch-btn">&#9654;</div>
+    <div id="touch-jump"  class="touch-btn"><span>&#9650;</span><span>JUMP</span></div>
+    <div id="touch-pause" class="touch-btn">II</div>
+  </div>
   <script src="game.js"></script>
 </body>
 </html>

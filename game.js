@@ -17,7 +17,7 @@ resizeCanvas();
 // ── Constants ────────────────────────────────────────────────
 const CHAR_SPEED_RIGHT = 4;
 const CHAR_SPEED_LEFT  = 2; // fixed; slower than scroll so player can't run left to escape
-const GROUND_OFFSET = 80; // px from bottom
+const GROUND_OFFSET = 80; // px from bottom (unused — groundY now uses canvas fraction)
 const BASE_SCROLL = 3;
 function levelLength(lvl) { return 4000 + (lvl - 1) * 1000; } // Level 1=4000 … Level 7=10000
 const JUMP_VELOCITY = -14 * 2 / 3;
@@ -41,6 +41,34 @@ window.addEventListener('keydown', e => {
   }
 });
 window.addEventListener('keyup', e => { keys[e.code] = false; });
+
+// ── Touch controls ───────────────────────────────────────────
+if ('ontouchstart' in window) {
+  document.getElementById('touch-controls').style.display = 'block';
+
+  function bindTouchBtn(id, code) {
+    const el = document.getElementById(id);
+    el.addEventListener('touchstart', e => {
+      e.preventDefault();
+      if (!keys[code]) {
+        keys[code] = true;
+        handleKeyPress(code);
+      }
+    }, { passive: false });
+    el.addEventListener('touchend',    e => { e.preventDefault(); keys[code] = false; }, { passive: false });
+    el.addEventListener('touchcancel', e => { e.preventDefault(); keys[code] = false; }, { passive: false });
+  }
+
+  bindTouchBtn('touch-left',  'ArrowLeft');
+  bindTouchBtn('touch-right', 'ArrowRight');
+  bindTouchBtn('touch-jump',  'Space');
+
+  document.getElementById('touch-pause').addEventListener('touchstart', e => {
+    e.preventDefault();
+    handleKeyPress('Escape');
+  }, { passive: false });
+  document.getElementById('touch-pause').addEventListener('touchend', e => { e.preventDefault(); }, { passive: false });
+}
 
 function handleKeyPress(code) {
   if (code === 'Escape') {
@@ -69,7 +97,7 @@ const char = {
 };
 
 function groundY() {
-  return canvas.height - GROUND_OFFSET;
+  return canvas.height * (2 / 3);
 }
 
 function charFeetY() {
