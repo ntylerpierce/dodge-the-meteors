@@ -528,14 +528,14 @@ function drawDoor() {
 
   // Frame (fixed)
   rect(x - 18, gy - 56, 36, 56);
-  // Knob (fixed on frame)
-  circle(x + 8, gy - 28, 3);
   // Door panel: hinge on left edge, swings rightward into the room.
   // Foreshorten the apparent width as angle increases: width = full * cos(angle).
   // At angle=0 the panel fills the opening; at PI/2 it's edge-on (invisible).
   const panelW = 36 * Math.cos(doorAngle);
   if (panelW > 0.5) {
     rect(x - 18, gy - 56, panelW, 56);
+    // Knob sits 26px from the hinge on the panel; foreshortens with it.
+    circle(x - 18 + (26 / 36) * panelW, gy - 28, 3);
   }
 }
 
