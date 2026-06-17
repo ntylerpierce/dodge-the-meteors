@@ -34,7 +34,10 @@ Built with zero dependencies — pure HTML5 Canvas, vanilla JavaScript, and CSS.
 - Falling meteors with animated flame tails and ground warning indicators (▼)
 - Flattened death state with instant restart
 - Exit door with swing-open animation — world stops scrolling when the door reaches center screen
-- Score tracking with high score saved locally via `localStorage`
+- Ground-based scoring — points only accumulate while the player is running on the ground; jumping pauses the counter
+- Score freezes when the world stops scrolling at the end of a level
+- Death resets the score back to what it was at the start of that level — no death-farming exploits
+- High score saved locally via `localStorage`
 - Mobile touch controls overlay
 - Parallax wireframe mountain background
 - Pause functionality (Escape key or PAUSE button)
