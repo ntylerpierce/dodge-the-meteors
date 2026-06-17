@@ -795,7 +795,7 @@ function gameLoop(timestamp) {
   // Update
   if (state === 'playing') {
     distance += scrollDelta;
-    if (char.state === 'running') score += dt * 10 * level;
+    if (char.state === 'running' && scrollDelta > 0) score += dt * 10 * level;
     bgOffset += scrollDelta * 0.4;
 
     updateChar(dt);
