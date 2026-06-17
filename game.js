@@ -28,6 +28,7 @@ const HUD_HEIGHT = 36;
 let state = 'title'; // title | playing | flattened | levelComplete | gameWin | paused
 let level = 1;
 let score = 0;
+let levelStartScore = 0;
 let distance = 0;
 let scrollSpeed = BASE_SCROLL;
 let lastTime = 0;
@@ -702,6 +703,11 @@ function drawWinScreen() {
 
 // ── Level init ───────────────────────────────────────────────
 function startLevel(lvl) {
+  if (state === 'flattened') {
+    score = levelStartScore;
+  } else {
+    levelStartScore = score;
+  }
   level = lvl;
   scrollSpeed = BASE_SCROLL + (level - 1) * 0.5;
   scrollSpeed = Math.min(scrollSpeed, 8);
@@ -727,7 +733,6 @@ function startLevel(lvl) {
   char.frame = 0;
   char.frameTimer = 0;
 
-  if (state === 'title') score = 0;
   state = 'playing';
 }
 
@@ -790,7 +795,7 @@ function gameLoop(timestamp) {
   // Update
   if (state === 'playing') {
     distance += scrollDelta;
-    score += dt * 10 * level;
+    if (char.state === 'running') score += dt * 10 * level;
     bgOffset += scrollDelta * 0.4;
 
     updateChar(dt);
